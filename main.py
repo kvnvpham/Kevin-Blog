@@ -229,5 +229,10 @@ def delete_post(post_id):
     return redirect(url_for('get_all_posts'))
 
 
+@app.context_processor
+def inject_copyright():
+    return {"year": date.today().year}
+
+
 if __name__ == "__main__":
     app.run(debug=True)
