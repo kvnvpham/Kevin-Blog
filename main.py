@@ -91,7 +91,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-@app.route('/')
+@app.route('/home')
 def get_all_posts():
     posts = BlogPost.query.all()
     return render_template("index.html", all_posts=posts)
@@ -235,4 +235,4 @@ def inject_copyright():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run()
