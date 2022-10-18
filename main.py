@@ -19,7 +19,7 @@ Bootstrap(app)
 login_manager = LoginManager(app)
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:///blog.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -92,7 +92,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-@app.route('/home')
+@app.route('/')
 def get_all_posts():
     posts = BlogPost.query.all()
     return render_template("index.html", all_posts=posts)
@@ -236,4 +236,4 @@ def inject_copyright():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
