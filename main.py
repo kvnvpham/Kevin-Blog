@@ -13,7 +13,7 @@ import bleach
 import os
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "8BYkEfBA6O6donzWlSihBXox7C0sKR6b"
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 ckeditor = CKEditor(app)
 Bootstrap(app)
 login_manager = LoginManager(app)
@@ -72,7 +72,7 @@ def clean_text(content):
                     ]
     allowed_attrs = {'*': ['class'],
                      'a': ['href', 'rel'],
-                     'img': ['src', 'alt', 'style']
+                     'img': ['src', 'alt', 'style', 'width', 'height']
                      }
     cleaned_text = bleach.clean(content, tags=allowed_tags, attributes=allowed_attrs)
     return cleaned_text
